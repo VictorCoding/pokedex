@@ -2,8 +2,8 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import analyze from 'rgbaster';
 
 @Component({
-    selector: 'pokemon-item',
-    styleUrls: ['./pokemon-item.scss'],
+    selector: 'pokemon-card',
+    styleUrls: ['./pokemon-card.scss'],
     template: `
         <!-- TODO: add a loading image -->
         <div class="main-container" #mainContainer>
@@ -15,7 +15,7 @@ import analyze from 'rgbaster';
         </div>
     `
 })
-export class PokemonItemComponent implements OnInit{
+export class PokemonCardComponent implements OnInit{
     @Input()
     pokemon?;
     @Input()

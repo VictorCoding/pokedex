@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
-import {PokemonItemComponent} from '../components/pokemon-item/pokemon-item.component';
+import {PokemonCardComponent} from '../components/pokemon-card/pokemon-card.component';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import {PokemonItemComponent} from '../components/pokemon-item/pokemon-item.comp
     Tab1PageRoutingModule
   ],
   declarations: [
-    PokemonItemComponent,
+    PokemonCardComponent,
     Tab1Page,
   ]
 })

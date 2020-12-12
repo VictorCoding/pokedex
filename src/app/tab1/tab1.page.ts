@@ -20,7 +20,7 @@ import {ApiProvider} from '../providers/api.provider';
       </ion-header>
       <ion-searchbar (ionChange)="doSearch($event)"></ion-searchbar>
       <ion-list class="pokemon-list">
-        <pokemon-item *ngFor="let pokemon of pokemons" [pokemon]="pokemon" [hasData]="didSearch"></pokemon-item>
+        <pokemon-card *ngFor="let pokemon of pokemons" [pokemon]="pokemon" [hasData]="didSearch"></pokemon-card>
       </ion-list>
       <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMorePokemon($event)">
         <ion-infinite-scroll-content
