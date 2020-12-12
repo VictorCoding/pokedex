@@ -24,3 +24,71 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-badge.fire {
+  --background: #B22328;
+}
+
+ion-badge.fighting {
+  --background: #9F422A;
+}
+
+ion-badge.flying {
+  --background: #90B1C5;
+}
+
+ion-badge.poison {
+  --background: #642785;
+}
+
+ion-badge.ground {
+  --background: #AD7235;
+}
+
+ion-badge.rock {
+  --background: #4B190E;
+}
+
+ion-badge.bug {
+  --background: #179A55;
+}
+
+ion-badge.ghost {
+  --background: #363069;
+}
+
+ion-badge.steel {
+  --background: #5C756D;
+}
+
+ion-badge.water {
+  --background: #2648DC;
+}
+
+ion-badge.grass {
+  --background: #007C42;
+}
+
+ion-badge.electric {
+  --background: #E0E64B;
+}
+
+ion-badge.psychic {
+  --background: #AC296B;
+}
+
+ion-badge.ice {
+  --background: #7ECFF2;
+}
+
+ion-badge.dragon {
+  --background: #378A94;
+}
+
+ion-badge.fairy {
+  --background: #9E1A44;
+}
+
+ion-badge.dark {
+  --background: #040706;
+}

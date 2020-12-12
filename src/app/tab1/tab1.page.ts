@@ -18,6 +18,7 @@ import {ApiProvider} from '../providers/api.provider';
           <ion-title size="large">Pokemon</ion-title>
         </ion-toolbar>
       </ion-header>
+      <!-- TODO: make it sticky -->
       <ion-searchbar (ionChange)="doSearch($event)"></ion-searchbar>
       <ion-list class="pokemon-list">
         <pokemon-card *ngFor="let pokemon of pokemons" [pokemon]="pokemon"></pokemon-card>

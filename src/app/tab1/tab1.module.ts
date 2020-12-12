@@ -6,6 +6,7 @@ import { Tab1Page } from './tab1.page';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import {PokemonCardComponent} from '../components/pokemon-card/pokemon-card.component';
+import {PokemonPage} from './pokemon/pokemon.page';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {PokemonCardComponent} from '../components/pokemon-card/pokemon-card.comp
   ],
   declarations: [
     PokemonCardComponent,
+    PokemonPage,
     Tab1Page,
   ]
 })
