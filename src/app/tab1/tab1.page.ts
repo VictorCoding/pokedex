@@ -20,7 +20,7 @@ import {ApiProvider} from '../providers/api.provider';
       </ion-header>
       <ion-searchbar (ionChange)="doSearch($event)"></ion-searchbar>
       <ion-list class="pokemon-list">
-        <pokemon-card *ngFor="let pokemon of pokemons" [pokemon]="pokemon" [hasData]="didSearch"></pokemon-card>
+        <pokemon-card *ngFor="let pokemon of pokemons" [pokemon]="pokemon"></pokemon-card>
       </ion-list>
       <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMorePokemon($event)">
         <ion-infinite-scroll-content
@@ -34,7 +34,6 @@ import {ApiProvider} from '../providers/api.provider';
 })
 export class Tab1Page implements OnInit  {
   pokemons = [];
-  didSearch = false;
 
   constructor(
       private apiProvider: ApiProvider
@@ -64,14 +63,12 @@ export class Tab1Page implements OnInit  {
       return;
     }
 
-    this.didSearch = false;
     this.apiProvider.findPokemon(pokemonName).then(res => {
       if (res.error) {
         this.pokemons = [];
         return;
       }
 
-      this.didSearch = true;
       this.pokemons = [res];
     });
   }

@@ -1,5 +1,7 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import analyze from 'rgbaster';
+import {NavController} from '@ionic/angular';
+import {ApiProvider} from '../../providers/api.provider';
 
 @Component({
     selector: 'pokemon-card',
@@ -16,29 +18,35 @@ import analyze from 'rgbaster';
     `
 })
 export class PokemonCardComponent implements OnInit{
+    // TODO: create interface
     @Input()
     pokemon?;
-    @Input()
-    hasData = false;
 
     @ViewChild('imageHolder')
     imageHolder: ElementRef<HTMLDivElement>;
     @ViewChild('mainContainer')
     mainContainer: ElementRef<HTMLDivElement>;
 
+    @HostListener('click')
+    handleCardClick() {
+        this.navCtrl.navigateForward('tabs/tab1/pokemon');
+    }
+
+    constructor(
+        private navCtrl: NavController,
+        private apiProvider: ApiProvider,
+    ) {}
+
     ngOnInit() {
-        if (this.hasData) {
-            this.setupCard(this.pokemon);
+        this.loadPokemon();
+    }
+
+    loadPokemon() {
+        if (this.pokemon.url) {
+            this.apiProvider.findPokemon(this.pokemon.name)
+                .then(res => this.setupCard(res));
         } else {
-            fetch(`${this.pokemon.url}`)
-                .then(res => res.json())
-                .then(res => {
-                    this.setupCard(res);
-                })
-                .catch(err => {
-                    // TODO: handle error
-                    console.log('err', err);
-                });
+            this.setupCard(this.pokemon);
         }
     }
 
