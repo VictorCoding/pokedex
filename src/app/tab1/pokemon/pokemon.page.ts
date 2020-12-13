@@ -37,7 +37,6 @@ import {ApiProvider} from '../../providers/api.provider';
                 </ion-segment-button>
             </ion-segment>
             <ng-container *ngIf="selectedSegment === 'stats'">
-                stats
                 <div class="stat-container">
                     <div class="stat-name">
                         <div *ngFor="let stat of pokemon?.stats">
@@ -52,7 +51,11 @@ import {ApiProvider} from '../../providers/api.provider';
                 </div>
             </ng-container>
             <ng-container *ngIf="selectedSegment === 'moves'">
-                moves
+                <ion-list>
+                    <ion-item *ngFor="let move of pokemon?.moves">
+                        {{move.move.name}}
+                    </ion-item>
+                </ion-list>
             </ng-container>
         </ion-content>
     `
