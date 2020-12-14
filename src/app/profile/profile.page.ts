@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { Storage } from '../utils';
 
 const usernameStorage = new Storage('username');
@@ -52,7 +52,7 @@ const caughtStorage = new Storage('caught');
   `,
   styleUrls: ['profile.page.scss']
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage {
   userName = '';
   selectedSegment = 'caught';
   wishList = [];
@@ -60,7 +60,8 @@ export class ProfilePage implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
+  ionViewDidEnter() {
+    console.log('did enter');
     this.userName = usernameStorage.get();
     this.loadWishList();
     this.loadCaught();
