@@ -15,4 +15,4 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
   ],
   declarations: [ProfilePage]
 })
-export class Tab2PageModule {}
+export class ProfilePageModule {}

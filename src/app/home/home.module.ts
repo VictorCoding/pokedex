@@ -2,9 +2,9 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab1Page } from './tab1.page';
+import { HomePage } from './home.page';
 
-import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { HomePageRoutingModule } from './home-routing.module';
 import {PokemonCardComponent} from '../components/pokemon-card/pokemon-card.component';
 import {PokemonPage} from './pokemon/pokemon.page';
 
@@ -13,12 +13,12 @@ import {PokemonPage} from './pokemon/pokemon.page';
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab1PageRoutingModule
+    HomePageRoutingModule
   ],
   declarations: [
     PokemonCardComponent,
     PokemonPage,
-    Tab1Page,
+    HomePage,
   ]
 })
-export class Tab1PageModule {}
+export class HomePageModule {}

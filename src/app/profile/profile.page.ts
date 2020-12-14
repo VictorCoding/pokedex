@@ -61,7 +61,6 @@ export class ProfilePage {
   constructor() {}
 
   ionViewDidEnter() {
-    console.log('did enter');
     this.userName = usernameStorage.get();
     this.loadWishList();
     this.loadCaught();

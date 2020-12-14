@@ -5,7 +5,6 @@ export class ApiProvider {
     private baseUrl = 'https://pokeapi.co/api/v2';
 
     pokemonList(offset = 0, limit = 20): Promise<any> {
-        console.log('offset', offset);
         return fetch(`${this.baseUrl}/pokemon?limit=${limit}&offset=${offset}`)
             .then(res => res.json())
             .then(res => {

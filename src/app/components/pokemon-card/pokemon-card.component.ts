@@ -37,7 +37,7 @@ export class PokemonCardComponent implements OnInit{
     @HostListener('click')
     handleCardClick() {
         this.navCtrl.navigateForward(
-            'tabs/tab1/pokemon',
+            'tabs/home/pokemon',
             {
                 queryParams: {
                     name: this.pokemon.name,

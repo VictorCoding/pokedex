@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApiProvider} from '../providers/api.provider';
 
 @Component({
-  selector: 'app-tab1',
+  selector: 'home',
   template: `
     <ion-header [translucent]="true">
       <ion-toolbar>
@@ -31,9 +31,9 @@ import {ApiProvider} from '../providers/api.provider';
       </ion-infinite-scroll>
     </ion-content>
   `,
-  styleUrls: ['tab1.page.scss']
+  styleUrls: ['home.page.scss']
 })
-export class Tab1Page implements OnInit  {
+export class HomePage implements OnInit  {
   pokemons = [];
 
   constructor(

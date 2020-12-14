@@ -88,7 +88,7 @@ export class PokemonPage implements OnInit, OnDestroy {
     }
 
     handleClick() {
-        this.navCtrl.navigateBack('tabs/tab1');
+        this.navCtrl.navigateBack('tabs/home');
     }
 
     ngOnDestroy() {
