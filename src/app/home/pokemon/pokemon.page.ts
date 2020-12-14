@@ -3,6 +3,10 @@ import {NavController} from '@ionic/angular';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ApiProvider} from '../../providers/api.provider';
+import { Storage } from '../../utils';
+
+const wishlistStorage = new Storage('wishlist');
+const caughtStorage = new Storage('caught');
 
 @Component({
     selector: 'pokemon',
@@ -26,6 +30,15 @@ import {ApiProvider} from '../../providers/api.provider';
                     <ion-badge *ngFor="let type of pokemon?.types" [className]="type.type.name">
                         {{type.type.name}}
                     </ion-badge>
+                    <!-- TODO: create custom icon component so that star turns yellow when clicked -->
+                    <ion-button (click)="addToWishList($event, pokemon?.name)">
+                        <ion-icon name="star-outline"></ion-icon>
+                        Wish List
+                    </ion-button>
+                    <ion-button (click)="addToCaught($event, pokemon?.name)">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                        Caught
+                    </ion-button>
                 </ion-card-content>
             </ion-card>
             <ion-segment (ionChange)="segmentChanged($event)" value="stats">
@@ -97,5 +110,19 @@ export class PokemonPage implements OnInit, OnDestroy {
 
     segmentChanged(event: CustomEvent) {
         this.selectedSegment = event.detail.value;
+    }
+
+    addToWishList(event: MouseEvent, pokemonName: string) {
+        event.stopPropagation();
+        const wishList = wishlistStorage.get(true) || [];
+        wishList.push(pokemonName);
+        wishlistStorage.set(wishList, true);
+    }
+
+    addToCaught(even: MouseEvent, pokemonName: string) {
+        event.stopPropagation();
+        const caught = caughtStorage.get(true) || [];
+        caught.push(pokemonName);
+        caughtStorage.set(caught, true);
     }
 }
