@@ -2,6 +2,10 @@ import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@an
 import analyze from 'rgbaster';
 import {NavController} from '@ionic/angular';
 import {ApiProvider} from '../../providers/api.provider';
+import { Storage } from '../../utils';
+
+const wishlistStorage = new Storage('wishlist');
+const caughtStorage = new Storage('caught');
 
 @Component({
     selector: 'pokemon-card',
@@ -9,6 +13,9 @@ import {ApiProvider} from '../../providers/api.provider';
     template: `
         <!-- TODO: add a loading image -->
         <div class="main-container" #mainContainer>
+            <!-- TODO: create custom icon component so that star turns yellow when clicked -->
+            <ion-icon (click)="addToWishList($event, pokemon.name)" name="star-outline"></ion-icon>
+            <ion-icon (click)="addToCaught($event, pokemon.name)" name="add-circle-outline"></ion-icon>
             <div #imageHolder class="image-holder">
             </div>
             <div class="name-holder">
@@ -70,5 +77,19 @@ export class PokemonCardComponent implements OnInit{
             this.imageHolder.nativeElement.appendChild(img);
         };
         img.src = pokemonImg;
+    }
+
+    addToWishList(event: MouseEvent, pokemonName: string) {
+        event.stopPropagation();
+        const wishList = wishlistStorage.get(true) || [];
+        wishList.push(pokemonName);
+        wishlistStorage.set(wishList, true);
+    }
+
+    addToCaught(even: MouseEvent, pokemonName: string) {
+        event.stopPropagation();
+        const caught = caughtStorage.get(true) || [];
+        caught.push(pokemonName);
+        caughtStorage.set(caught, true);
     }
 }

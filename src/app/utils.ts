@@ -5,14 +5,16 @@ class Storage {
         this.key = key;
     }
 
-    get<T>(parse = false): string | T {
+    // tried to use generics here but it was a mess
+    // when actually trying to use it ugh
+    get(parse = false): any | null {
         let value = localStorage.getItem(this.key);
 
         if (parse) {
             try {
                 value = JSON.parse(value);
             } catch (e) {
-                value = '';
+                return null;
             }
         }
 
