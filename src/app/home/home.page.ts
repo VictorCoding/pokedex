@@ -23,7 +23,7 @@ import {ApiProvider} from '../providers/api.provider';
       <ion-list class="pokemon-list">
         <pokemon-card *ngFor="let pokemon of pokemons" [pokemon]="pokemon"></pokemon-card>
       </ion-list>
-      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMorePokemon($event)">
+      <ion-infinite-scroll [disabled]="searching" threshold="100px" (ionInfinite)="loadMorePokemon($event)">
         <ion-infinite-scroll-content
             loadingSpinner="bubbles"
             loadingText="Loading more pokemons...">
@@ -35,6 +35,7 @@ import {ApiProvider} from '../providers/api.provider';
 })
 export class HomePage implements OnInit  {
   pokemons = [];
+  searching = false;
 
   constructor(
       private apiProvider: ApiProvider
@@ -57,9 +58,11 @@ export class HomePage implements OnInit  {
   }
 
   doSearch(event: CustomEvent) {
+    this.searching = true;
     const pokemonName = event.detail.value;
 
     if (pokemonName === '') {
+      this.searching = false;
       this.loadPokemon();
       return;
     }
@@ -70,7 +73,7 @@ export class HomePage implements OnInit  {
         return;
       }
 
-      this.pokemons = [res];
+      this.pokemons = res;
     });
   }
 }

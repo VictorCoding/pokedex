@@ -80,7 +80,7 @@ export class PokemonPage implements OnInit, OnDestroy {
         // TODO: add piping
         this.paramsSubscription = this.route.queryParams.subscribe(params => {
             const name = params.name;
-            this.apiProvider.findPokemon(name)
+            this.apiProvider.getPokemon(name)
                 .then(res => {
                     this.pokemon = res;
                 });
