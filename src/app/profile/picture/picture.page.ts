@@ -106,6 +106,7 @@ export class PicturePage implements OnInit {
             height
         );
         const base64 = canvas.toDataURL();
+        // @ts-ignore
         this.imagePreview = this.sanitizer.bypassSecurityTrustUrl(base64);
     }
 
@@ -120,6 +121,7 @@ export class PicturePage implements OnInit {
 
     stopStream() {
         const stream = this.video.nativeElement.srcObject;
+        // @ts-ignore
         const tracks = stream.getTracks();
 
         tracks.forEach(track => track.stop());
