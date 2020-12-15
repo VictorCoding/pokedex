@@ -3,11 +3,11 @@ import {NavController} from '@ionic/angular';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ApiProvider} from '../../providers/api.provider';
-import { Storage } from '../../utils';
+import { StorageUtil } from '../../utils';
 
-const wishlistStorage = new Storage('wishlist');
+const wishlistStorage = new StorageUtil('wishlist');
 const wishList = wishlistStorage.get(true) || [];
-const caughtStorage = new Storage('caught');
+const caughtStorage = new StorageUtil('caught');
 const caught = caughtStorage.get(true) || [];
 
 @Component({

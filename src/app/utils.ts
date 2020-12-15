@@ -1,4 +1,4 @@
-class Storage {
+class StorageUtil {
     key = '';
 
     constructor(key: string) {
@@ -36,5 +36,5 @@ class Storage {
 }
 
 export {
-    Storage,
+    StorageUtil,
 };

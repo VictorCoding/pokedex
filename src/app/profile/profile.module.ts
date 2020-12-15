@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ProfilePage } from './profile.page';
 
 import { ProfilePageRoutingModule } from './profile-routing.module';
+import {PicturePage} from './picture/picture.page';
 
 @NgModule({
   imports: [
@@ -13,6 +14,9 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
     FormsModule,
     ProfilePageRoutingModule
   ],
-  declarations: [ProfilePage]
+  declarations: [
+    PicturePage,
+    ProfilePage,
+  ]
 })
 export class ProfilePageModule {}

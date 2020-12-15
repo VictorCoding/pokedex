@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
-import { Storage } from '../utils';
+import { StorageUtil } from '../utils';
+import {NavController} from '@ionic/angular';
 
-const usernameStorage = new Storage('username');
-const wishListStorage = new Storage('wishlist');
-const caughtStorage = new Storage('caught');
+const usernameStorage = new StorageUtil('username');
+const wishListStorage = new StorageUtil('wishlist');
+const caughtStorage = new StorageUtil('caught');
+const profileStorage = new StorageUtil('profile');
 
 @Component({
   selector: 'profile',
@@ -20,8 +22,9 @@ const caughtStorage = new Storage('caught');
       <ion-header collapse="condense">
         <ion-toolbar>
           <!-- TODO: add ability to take picture -->
-          <ion-avatar>
-            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          <ion-avatar (click)="takeMeToPicture()">
+            <img *ngIf="!profilePicture" src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+            <img *ngIf="profilePicture" [src]="profilePicture">
           </ion-avatar>
           <ion-input placeholder="Your name..." (ionChange)="handleNameChange($event)" [value]="userName"></ion-input>
         </ion-toolbar>
@@ -57,13 +60,17 @@ export class ProfilePage {
   selectedSegment = 'caught';
   wishList = [];
   caught = [];
+  profilePicture = '';
 
-  constructor() {}
+  constructor(
+      private navCtrl: NavController,
+  ) {}
 
   ionViewDidEnter() {
     this.userName = usernameStorage.get();
     this.loadWishList();
     this.loadCaught();
+    this.loadProfilePicture();
   }
 
   handleNameChange(event: CustomEvent) {
@@ -80,5 +87,13 @@ export class ProfilePage {
 
   loadCaught() {
     this.caught = caughtStorage.get(true) || [];
+  }
+
+  takeMeToPicture() {
+    this.navCtrl.navigateForward('tabs/profile/picture');
+  }
+
+  loadProfilePicture() {
+    this.profilePicture = profileStorage.get() || '';
   }
 }
