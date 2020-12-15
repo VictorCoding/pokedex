@@ -6,6 +6,7 @@ import { ProfilePage } from './profile.page';
 
 import { ProfilePageRoutingModule } from './profile-routing.module';
 import {PicturePage} from './picture/picture.page';
+import {PokemonListItemComponent} from './pokemon-list-item/pokemon-list-item.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {PicturePage} from './picture/picture.page';
   ],
   declarations: [
     PicturePage,
+    PokemonListItemComponent,
     ProfilePage,
   ]
 })

@@ -39,16 +39,12 @@ const profileStorage = new StorageUtil('profile');
       </ion-segment>
       <ng-container *ngIf="selectedSegment === 'caught'">
         <ion-list>
-          <ion-item *ngFor="let pokemon of caught">
-            {{pokemon}}
-          </ion-item>
+            <pokemon-list-item *ngFor="let pokemon of caught" [pokemonName]="pokemon"></pokemon-list-item>
         </ion-list>
       </ng-container>
       <ng-container *ngIf="selectedSegment === 'wishlist'">
         <ion-list>
-          <ion-item *ngFor="let pokemon of wishList">
-            {{pokemon}}
-          </ion-item>
+          <pokemon-list-item *ngFor="let pokemon of wishList" [pokemonName]="pokemon"></pokemon-list-item>
         </ion-list>
       </ng-container>
     </ion-content>
