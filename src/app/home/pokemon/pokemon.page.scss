@@ -20,6 +20,8 @@ ion-segment {
 
 .stat-container {
   display: flex;
+  justify-content: center;
+  margin-top: 32px;
 
   .stat-name {
     margin-right: 20px;
@@ -31,6 +33,11 @@ ion-segment {
       height: 19px;
       display: flex;
       alig-items: center;
+
+      ion-progress-bar {
+        height: 12px;
+        border-radius: 5px;
+      }
     }
   }
 }

@@ -63,7 +63,7 @@ const caught = caughtStorage.get(true) || [];
                     </div>
                     <div class="stat-value">
                         <div *ngFor="let stat of pokemon?.stats">
-                            <ion-progress-bar [value]="stat.base_stat / 100"></ion-progress-bar>
+                            <ion-progress-bar [color]="statsColorMap[stat.stat.name]" [value]="stat.base_stat / 200"></ion-progress-bar>
                         </div>
                     </div>
                 </div>
@@ -85,6 +85,14 @@ export class PokemonPage implements OnInit, OnDestroy {
     selectedSegment = 'stats';
     isCaught = false;
     inWishList = false;
+    statsColorMap = {
+        hp: 'success',
+        attack: 'danger',
+        defense: 'primary',
+        'special-attack': 'warning',
+        'special-defense': 'secondary',
+        speed: 'tertiary',
+    };
 
     constructor(
         private navCtrl: NavController,
