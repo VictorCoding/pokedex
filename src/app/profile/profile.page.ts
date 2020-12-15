@@ -21,7 +21,6 @@ const profileStorage = new StorageUtil('profile');
     <ion-content [fullscreen]="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <!-- TODO: add ability to take picture -->
           <ion-avatar (click)="takeMeToPicture()">
             <img *ngIf="!profilePicture" src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
             <img *ngIf="profilePicture" [src]="profilePicture">

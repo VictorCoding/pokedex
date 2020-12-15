@@ -5,10 +5,10 @@ import {ApiProvider} from '../../providers/api.provider';
     selector: 'pokemon-list-item',
     template: `
         <ion-item>
-            <ion-thumbnail>
+            <ion-thumbnail *ngIf="imageUrl">
                 <img [src]="imageUrl">
             </ion-thumbnail>
-            {{pokemonName}}
+            <ion-label>{{pokemonName}}</ion-label>
         </ion-item>
     `
 })
