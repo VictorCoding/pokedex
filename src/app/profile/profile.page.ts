@@ -62,7 +62,7 @@ export class ProfilePage {
   ) {}
 
   ionViewDidEnter() {
-    this.userName = usernameStorage.get();
+    this.userName = usernameStorage.get() || '';
     this.loadWishList();
     this.loadCaught();
     this.loadProfilePicture();

@@ -120,6 +120,10 @@ export class PicturePage implements OnInit {
     }
 
     stopStream() {
+        if (!this.video) {
+            return;
+        }
+
         const stream = this.video.nativeElement.srcObject;
         // @ts-ignore
         const tracks = stream.getTracks();
