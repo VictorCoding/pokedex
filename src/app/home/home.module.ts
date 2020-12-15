@@ -6,18 +6,18 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import {PokemonCardComponent} from '../components/pokemon-card/pokemon-card.component';
-import {PokemonPage} from './pokemon/pokemon.page';
+import {PokemonPage} from '../components/pokemon/pokemon.page';
+import {CommonComponentsModule} from '../components/common-components.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+      CommonComponentsModule,
   ],
   declarations: [
-    PokemonCardComponent,
-    PokemonPage,
     HomePage,
   ]
 })

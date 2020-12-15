@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ApiProvider} from '../../providers/api.provider';
+import {NavController} from '@ionic/angular';
 
 @Component({
     selector: 'pokemon-list-item',
     template: `
-        <ion-item>
+        <ion-item (click)="viewPokemon()">
             <ion-thumbnail *ngIf="imageUrl">
                 <img [src]="imageUrl">
             </ion-thumbnail>
@@ -20,6 +21,7 @@ export class PokemonListItemComponent implements OnInit {
 
     constructor(
         private apiProvider: ApiProvider,
+        private navCtrl: NavController,
     ) {}
 
     ngOnInit() {
@@ -27,5 +29,13 @@ export class PokemonListItemComponent implements OnInit {
             .subscribe(res => {
                 this.imageUrl = res.sprites.other['official-artwork']['front_default'];
             });
+    }
+
+    viewPokemon() {
+        this.navCtrl.navigateForward('tabs/profile/pokemon', {
+            queryParams: {
+                name: this.pokemonName,
+            }
+        });
     }
 }

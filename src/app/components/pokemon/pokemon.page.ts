@@ -18,7 +18,7 @@ const caught = caughtStorage.get(true) || [];
         <ion-header>
             <ion-toolbar>
                 <ion-buttons slot="start">
-                    <ion-back-button (click)="handleClick()"></ion-back-button>
+                    <ion-back-button></ion-back-button>
                 </ion-buttons>
             </ion-toolbar>
         </ion-header>
