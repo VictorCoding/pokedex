@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiProvider} from '../providers/api.provider';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'home',
@@ -33,9 +35,10 @@ import {ApiProvider} from '../providers/api.provider';
   `,
   styleUrls: ['home.page.scss']
 })
-export class HomePage implements OnInit  {
+export class HomePage implements OnInit, OnDestroy  {
   pokemons = [];
   searching = false;
+  private destroyed$: Subject<boolean> = new Subject();
 
   constructor(
       private apiProvider: ApiProvider
@@ -45,16 +48,30 @@ export class HomePage implements OnInit  {
     this.loadPokemon();
   }
 
-  async loadPokemon() {
-    const { results } = await this.apiProvider.pokemonList();
-    this.pokemons = results;
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
+
+  loadPokemon() {
+    this.apiProvider.pokemonList()
+        .pipe(
+            takeUntil(this.destroyed$),
+        )
+        .subscribe(({ results }) => {
+          this.pokemons = results;
+        });
   }
 
   async loadMorePokemon(event) {
     const offset = this.pokemons.length;
-    const { results } = await this.apiProvider.pokemonList(offset);
-    this.pokemons.push(...results);
-    event.target.complete();
+    this.apiProvider.pokemonList(offset)
+        .pipe(
+            takeUntil(this.destroyed$),
+        ).subscribe(({ results }) => {
+          this.pokemons.push(...results);
+          event.target.complete();
+        });
   }
 
   doSearch(event: CustomEvent) {
@@ -67,13 +84,16 @@ export class HomePage implements OnInit  {
       return;
     }
 
-    this.apiProvider.findPokemon(pokemonName).then(res => {
-      if (res.error) {
-        this.pokemons = [];
-        return;
-      }
+    this.apiProvider.findPokemon(pokemonName)
+        .pipe(
+            takeUntil(this.destroyed$),
+        ).subscribe(res => {
+          if (res.error) {
+            this.pokemons = [];
+            return;
+          }
 
-      this.pokemons = res;
-    });
+          this.pokemons = res;
+        });
   }
 }

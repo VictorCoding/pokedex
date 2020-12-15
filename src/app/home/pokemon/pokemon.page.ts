@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NavController} from '@ionic/angular';
 import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {Subject} from 'rxjs';
 import {ApiProvider} from '../../providers/api.provider';
 import { StorageUtil } from '../../utils';
+import {flatMap, takeUntil} from 'rxjs/operators';
 
 const wishlistStorage = new StorageUtil('wishlist');
 const wishList = wishlistStorage.get(true) || [];
@@ -79,7 +80,6 @@ const caught = caughtStorage.get(true) || [];
     `
 })
 export class PokemonPage implements OnInit, OnDestroy {
-    paramsSubscription: Subscription;
     // TODO: add interface
     pokemon;
     selectedSegment = 'stats';
@@ -93,6 +93,7 @@ export class PokemonPage implements OnInit, OnDestroy {
         'special-defense': 'secondary',
         speed: 'tertiary',
     };
+    private destroyed$: Subject<boolean> = new Subject();
 
     constructor(
         private navCtrl: NavController,
@@ -105,19 +106,23 @@ export class PokemonPage implements OnInit, OnDestroy {
     }
 
     loadPokemon() {
-        // TODO: add piping
-        this.paramsSubscription = this.route.queryParams.subscribe(params => {
-            const name = params.name;
-            this.apiProvider.getPokemon(name)
-                .then(res => {
-                    this.pokemon = res;
-                });
-            this.inWishList = wishList.filter(item => {
-                return item === name;
-            }).length > 0;
-            this.isCaught = caught.filter(item => {
-                return item === name;
-            }).length > 0;
+        this.route.queryParams
+            .pipe(
+                flatMap(params => {
+                    const name = params.name;
+
+                    return this.apiProvider.getPokemon(name);
+                }),
+                takeUntil(this.destroyed$),
+            ).subscribe(pokemon => {
+                this.pokemon = pokemon;
+
+                this.inWishList = wishList.filter(item => {
+                    return item === pokemon.name;
+                }).length > 0;
+                this.isCaught = caught.filter(item => {
+                    return item === pokemon.name;
+                }).length > 0;
         });
     }
 
@@ -126,7 +131,8 @@ export class PokemonPage implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.paramsSubscription.unsubscribe();
+        this.destroyed$.next(true);
+        this.destroyed$.complete();
     }
 
     segmentChanged(event: CustomEvent) {

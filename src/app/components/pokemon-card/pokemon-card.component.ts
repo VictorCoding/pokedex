@@ -50,7 +50,7 @@ export class PokemonCardComponent implements OnInit{
     loadPokemon() {
         if (this.pokemon.url) {
             this.apiProvider.getPokemon(this.pokemon.name)
-                .then(res => this.setupCard(res));
+                .subscribe(res => this.setupCard(res));
         } else {
             this.setupCard(this.pokemon);
         }
