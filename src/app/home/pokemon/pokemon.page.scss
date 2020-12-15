@@ -4,7 +4,12 @@ ion-img {
 }
 
 ion-badge {
-  margin-right: 15px;
+  margin-right: 10px;
+}
+
+.badges-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 ion-segment {

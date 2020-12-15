@@ -6,7 +6,9 @@ import {ApiProvider} from '../../providers/api.provider';
 import { Storage } from '../../utils';
 
 const wishlistStorage = new Storage('wishlist');
+const wishList = wishlistStorage.get(true) || [];
 const caughtStorage = new Storage('caught');
+const caught = caughtStorage.get(true) || [];
 
 @Component({
     selector: 'pokemon',
@@ -27,18 +29,21 @@ const caughtStorage = new Storage('caught');
                 </ion-card-header>
 
                 <ion-card-content>
-                    <ion-badge *ngFor="let type of pokemon?.types" [className]="type.type.name">
-                        {{type.type.name}}
-                    </ion-badge>
-                    <!-- TODO: create custom icon component so that star turns yellow when clicked -->
-                    <ion-button (click)="addToWishList($event, pokemon?.name)">
-                        <ion-icon name="star-outline"></ion-icon>
-                        Wish List
-                    </ion-button>
-                    <ion-button (click)="addToCaught($event, pokemon?.name)">
-                        <ion-icon name="add-circle-outline"></ion-icon>
-                        Caught
-                    </ion-button>
+                    <div class="badges-container">
+                        <div class="types-holder">
+                            <ion-badge *ngFor="let type of pokemon?.types" [className]="type.type.name">
+                                {{type.type.name}}
+                            </ion-badge>
+                        </div>
+                        <div class="actions-holder">
+                            <ion-badge [color]="isCaught ? 'success' : 'medium'" (click)="toggleCaught(pokemon.name)">
+                                caught
+                            </ion-badge>
+                            <ion-badge [color]="inWishList ? 'success' : 'medium'" (click)="toggleWishList(pokemon.name)">
+                                wish list
+                            </ion-badge>
+                        </div>
+                    </div>
                 </ion-card-content>
             </ion-card>
             <ion-segment (ionChange)="segmentChanged($event)" value="stats">
@@ -78,6 +83,8 @@ export class PokemonPage implements OnInit, OnDestroy {
     // TODO: add interface
     pokemon;
     selectedSegment = 'stats';
+    isCaught = false;
+    inWishList = false;
 
     constructor(
         private navCtrl: NavController,
@@ -97,6 +104,12 @@ export class PokemonPage implements OnInit, OnDestroy {
                 .then(res => {
                     this.pokemon = res;
                 });
+            this.inWishList = wishList.filter(item => {
+                return item === name;
+            }).length > 0;
+            this.isCaught = caught.filter(item => {
+                return item === name;
+            }).length > 0;
         });
     }
 
@@ -112,17 +125,35 @@ export class PokemonPage implements OnInit, OnDestroy {
         this.selectedSegment = event.detail.value;
     }
 
-    addToWishList(event: MouseEvent, pokemonName: string) {
-        event.stopPropagation();
-        const wishList = wishlistStorage.get(true) || [];
-        wishList.push(pokemonName);
+    /**
+     * Adds/removes a pokemon name from the wish list storage.
+     */
+    toggleWishList(pokemonName: string) {
+        if (wishlistStorage.exists(pokemonName)) {
+            const idx = wishList.findIndex(x => x === pokemonName);
+            wishList.splice(idx, 1);
+            this.inWishList = false;
+        } else {
+            this.inWishList = true;
+            wishList.push(pokemonName);
+        }
+
         wishlistStorage.set(wishList, true);
     }
 
-    addToCaught(even: MouseEvent, pokemonName: string) {
-        event.stopPropagation();
-        const caught = caughtStorage.get(true) || [];
-        caught.push(pokemonName);
+    /**
+     * Adds/removes a pokemon name from the caught list storage.
+     */
+    toggleCaught(pokemonName: string) {
+        if (caughtStorage.exists(pokemonName)) {
+            const idx = caught.findIndex(x => x === pokemonName);
+            caught.splice(idx, 1);
+            this.isCaught = false;
+        } else {
+            this.isCaught = true;
+            caught.push(pokemonName);
+        }
+
         caughtStorage.set(caught, true);
     }
 }

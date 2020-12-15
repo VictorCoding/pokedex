@@ -28,6 +28,11 @@ class Storage {
 
         localStorage.setItem(this.key, value);
     }
+
+    exists(value: string) {
+        const list = this.get(true) || [];
+        return list.filter(x => x === value).length > 0;
+    }
 }
 
 export {
