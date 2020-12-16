@@ -27,7 +27,7 @@ export class PokemonListItemComponent implements OnInit {
     ngOnInit() {
         this.apiProvider.getPokemon(this.pokemonName)
             .subscribe(res => {
-                this.imageUrl = res.sprites.other['official-artwork']['front_default'];
+                this.imageUrl = res.sprites.other['official-artwork'].front_default;
             });
     }
 

@@ -48,7 +48,6 @@ const profileStorage = new StorageUtil('profile');
       </ng-container>
     </ion-content>
   `,
-  styleUrls: ['profile.page.scss']
 })
 export class ProfilePage {
   userName = '';

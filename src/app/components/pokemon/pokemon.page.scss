@@ -13,7 +13,6 @@ ion-badge {
 }
 
 ion-segment {
-  //margin-top: 20px;
   width: 70vw;
   margin: 0 auto;
 }
@@ -26,13 +25,14 @@ ion-segment {
   .stat-name {
     margin-right: 20px;
   }
+
   .stat-value {
     width: 40vw;
 
     div {
       height: 19px;
       display: flex;
-      alig-items: center;
+      align-items: center;
 
       ion-progress-bar {
         height: 12px;

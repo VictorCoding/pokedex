@@ -3,7 +3,7 @@ import {NavController} from '@ionic/angular';
 import {ActivatedRoute} from '@angular/router';
 import {Subject} from 'rxjs';
 import {ApiProvider} from '../../providers/api.provider';
-import { StorageUtil } from '../../utils';
+import {StorageUtil} from '../../utils';
 import {flatMap, takeUntil} from 'rxjs/operators';
 
 const wishlistStorage = new StorageUtil('wishlist');

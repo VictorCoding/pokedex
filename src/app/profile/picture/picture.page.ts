@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NavController, ToastController} from '@ionic/angular';
 import {DomSanitizer} from '@angular/platform-browser';
-import { StorageUtil } from '../../utils';
+import {StorageUtil} from '../../utils';
 
 const profileStorage = new StorageUtil('profile');
 
@@ -127,9 +127,7 @@ export class PicturePage implements OnInit {
         const stream = this.video.nativeElement.srcObject;
         // @ts-ignore
         const tracks = stream.getTracks();
-
         tracks.forEach(track => track.stop());
-
         this.video.nativeElement.srcObject = null;
     }
 }

@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomePage } from './home.page';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HomePage} from './home.page';
 import {PokemonPage} from '../components/pokemon/pokemon.page';
 
 const routes: Routes = [

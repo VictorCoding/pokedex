@@ -1,12 +1,10 @@
-import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
+import {IonicModule} from '@ionic/angular';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {HomePage} from './home.page';
 
-import { HomePageRoutingModule } from './home-routing.module';
-import {PokemonCardComponent} from '../components/pokemon-card/pokemon-card.component';
-import {PokemonPage} from '../components/pokemon/pokemon.page';
+import {HomePageRoutingModule} from './home-routing.module';
 import {CommonComponentsModule} from '../components/common-components.module';
 
 @NgModule({
@@ -15,7 +13,7 @@ import {CommonComponentsModule} from '../components/common-components.module';
     CommonModule,
     FormsModule,
     HomePageRoutingModule,
-      CommonComponentsModule,
+    CommonComponentsModule,
   ],
   declarations: [
     HomePage,

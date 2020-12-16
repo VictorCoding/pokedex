@@ -13,7 +13,7 @@ const extractResponse = (res: any): Observable<any> => {
 
 @Injectable()
 export class ApiProvider {
-    private baseUrl = 'https://pokeapi.co/api/v2';
+    private baseUrl = `https://pokeapi.co/api/v2`;
 
     /**
      * Returns a subset list of pokemons. Mainly used for pagination.
