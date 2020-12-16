@@ -2,6 +2,8 @@
 
 ##### Utilize the free pokemon open API (https://pokeapi.co/) to build a simple Pokedex (Pokemon Index) SPA in Angular.
 
+Inspired by https://github.com/skydoves/Pokedex
+
 Requirements:
 * A paginated and searchable list of Pokemon
 * Detail page with moves and stat attributes (as many as you'd like to include from the various APIs)
